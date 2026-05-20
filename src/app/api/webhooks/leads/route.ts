@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
+import { runLeadAutomationRules } from '@/app/actions/leads';
 
 export async function POST(request: Request) {
   try {
@@ -62,6 +63,13 @@ export async function POST(request: Request) {
             content: `Duplicate Detection Alert: Lead re-engaged. System auto-merged incoming records from source [${source}].\nDetails:\n${detailMsg}`
           }
         ]);
+
+        // Run automation rules to evaluate updates
+        try {
+          await runLeadAutomationRules();
+        } catch (e) {
+          console.error(e);
+        }
 
         // Trigger Event callback for lead update
         try {
@@ -152,6 +160,22 @@ export async function POST(request: Request) {
       }
     ]);
 
+    // Run active background workflows synchronously to apply dynamic SLA, routing, and VIP rules instantly
+    try {
+      await runLeadAutomationRules();
+    } catch (e) {
+      console.error('Failed to run lead automation rules synchronously', e);
+    }
+
+    // Refetch the updated lead state containing the VIP assignment upgrades
+    const { data: finalLead } = await supabase
+      .from('leads')
+      .select('*')
+      .eq('id', newLead.id)
+      .single();
+
+    const resultLead = finalLead || newLead;
+
     // 5. Trigger Outbound Event Webhook System
     try {
       const origin = new URL(request.url).origin;
@@ -160,10 +184,10 @@ export async function POST(request: Request) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           eventType: 'lead.created',
-          leadId: newLead.id,
+          leadId: resultLead.id,
           metadata: {
             source,
-            assignedTo
+            assignedTo: resultLead.assigned_to
           }
         })
       });
@@ -174,7 +198,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       success: true,
       action: 'created',
-      lead: newLead
+      lead: resultLead
     }, { status: 201 });
 
   } catch (error) {
