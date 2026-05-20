@@ -194,30 +194,9 @@ erDiagram
 
 ---
 
-## 8) Screenshots & UI Previews
 
-> Current repository visual assets used as evaluator-friendly previews.
+## 8) API Snapshot
 
-### Authentication / Entry Visuals
-
-![Login Illustration](./public/images/login-illustration.png)
-
-![Signup Illustration](./public/images/signup-illustration.png)
-
-### Workspace Theme / Sidebar Preview
-
-![Partner Sidebar Preview](./public/images/partner-sidebar.png)
-
-### Background Visual
-
-![Auth Background](./public/images/auth-bg.png)
-
----
-
-## 9) API Snapshot
-
-- `GET /api/partner/employees`
-- `GET /api/partner/messages`
 - `POST /api/partner/messages`
 - `GET /api/partner/messages/[threadId]`
 - `POST /api/partner/ledger/[id]/restore`
@@ -225,7 +204,7 @@ erDiagram
 
 ---
 
-## 10) Local Setup
+## 9) Local Setup
 
 ```bash
 # install dependencies
@@ -247,7 +226,7 @@ SUPABASE_SERVICE_ROLE_KEY=...
 
 ---
 
-## 11) Evaluation Guide (Fast Review Path)
+## 10) Evaluation Guide (Fast Review Path)
 
 1. Open `/` and verify role-based sandbox entry.
 2. Open `/capture` and submit a sample lead.
@@ -257,7 +236,7 @@ SUPABASE_SERVICE_ROLE_KEY=...
 
 ---
 
-## 12) Notes
+## 11) Notes
 
 - Some advanced modules rely on seeded Supabase data for richer dashboard and workflow states.
 
