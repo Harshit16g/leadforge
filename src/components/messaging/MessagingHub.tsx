@@ -32,6 +32,87 @@ interface Message {
   created_at: string;
 }
 
+function parseAndRenderMessageBody(body: string, isMine: boolean) {
+  if (body.includes("sharing the following") && body.includes("View:")) {
+    try {
+      const lines = body.split("\n");
+      const intro = lines[0];
+      
+      const leadLines = lines.filter(l => l.trim().startsWith("•") && l.includes("View:"));
+      const notesLine = lines.find(l => l.startsWith("Additional Notes:"));
+
+      return (
+        <div className="space-y-3.5 my-1">
+          <p className="text-sm font-bold opacity-90 leading-snug">{intro}</p>
+          
+          <div className="space-y-2 mt-2">
+            {leadLines.map((line, idx) => {
+              const match = line.match(/•\s*(.*?)\s*\((.*?)\)\s*-\s*View:\s*(https?:\/\/\S+)/);
+              if (match) {
+                const name = match[1];
+                const phone = match[2];
+                const url = match[3];
+                const leadId = url.split("/").pop();
+
+                return (
+                  <a
+                    key={idx}
+                    href={`/leads/${leadId}`}
+                    className={cn(
+                      "flex items-center justify-between p-3 rounded-2xl border transition-all hover:-translate-y-0.5",
+                      isMine 
+                        ? "bg-white/10 hover:bg-white/15 border-white/10 text-white shadow-inner" 
+                        : "bg-muted/40 hover:bg-muted/60 border-border text-foreground"
+                    )}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className={cn(
+                        "w-8 h-8 rounded-xl flex items-center justify-center font-bold text-xs uppercase shadow-sm shrink-0",
+                        isMine ? "bg-white/20 text-white" : "bg-blue-500/10 text-blue-500 border border-blue-500/15"
+                      )}>
+                        👤
+                      </div>
+                      <div className="flex flex-col text-left min-w-0">
+                        <span className="font-extrabold text-xs tracking-wide truncate max-w-[150px]">{name}</span>
+                        <span className={cn("text-[10px] font-semibold", isMine ? "text-white/60" : "text-muted-foreground")}>{phone}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-1 shrink-0">
+                      <span className={cn(
+                        "text-[9px] font-black uppercase tracking-wider px-2.5 py-1 rounded-xl shadow-sm",
+                        isMine ? "bg-white/15 text-white" : "bg-blue-600 text-white"
+                      )}>
+                        View Profile
+                      </span>
+                    </div>
+                  </a>
+                );
+              }
+              return <p key={idx} className="text-xs leading-relaxed">{line}</p>;
+            })}
+          </div>
+
+          {notesLine && (
+            <div className={cn(
+              "p-3 rounded-2xl text-xs mt-3 border shadow-sm",
+              isMine 
+                ? "bg-white/5 border-white/10 text-white/90" 
+                : "bg-amber-500/5 border-amber-500/10 text-foreground/90"
+            )}>
+              <span className="font-black uppercase tracking-wider text-[9px] text-amber-500 block mb-1">📌 Instructions Notes</span>
+              <p className="leading-relaxed font-semibold">{notesLine.replace("Additional Notes:", "").trim()}</p>
+            </div>
+          )}
+        </div>
+      );
+    } catch (e) {
+      // Fallback
+    }
+  }
+
+  return <p className="text-sm font-medium leading-relaxed whitespace-pre-wrap">{body}</p>;
+}
+
 export function MessagingHub() {
   const { user: currentUser } = useAuth();
   const { markThreadRead } = useMessaging();
@@ -365,7 +446,7 @@ export function MessagingHub() {
                             ? "bg-primary text-primary-foreground border-primary rounded-tr-none"
                             : "bg-card text-foreground border-border rounded-tl-none"
                         )}>
-                          <p className="text-sm font-medium leading-relaxed whitespace-pre-wrap">{m.body}</p>
+                          {parseAndRenderMessageBody(m.body, isMine)}
                           <div className={cn("mt-1.5 flex items-center gap-1.5 opacity-60", isMine ? "justify-end" : "justify-start")}>
                             <span className="text-[9px] font-black uppercase tracking-tighter">
                               {new Date(m.created_at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true })}

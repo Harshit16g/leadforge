@@ -179,8 +179,9 @@ export function LeadsTable({ initialLeads }: { initialLeads: any[] }) {
       const targetRepName = SALES_REPS.find(r => r.id === shareRepId)?.name || "Colleague";
       
       // Structure highly professional internal chat messages with active CRM links
+      const origin = typeof window !== "undefined" ? window.location.origin : "http://localhost:3000";
       const leadsListMarkdown = selectedDetails.map(l => {
-        return `• ${l.name} (${l.phone || "No phone"}) - View: http://localhost:3000/leads/${l.id}`;
+        return `• ${l.name} (${l.phone || "No phone"}) - View: ${origin}/leads/${l.id}`;
       }).join("\n");
 
       const messageBody = `Hi ${targetRepName}, sharing the following ${selectedLeadIds.length} lead profiles with you for review:\n\n${leadsListMarkdown}\n\n${shareNote.trim() ? `Additional Notes: ${shareNote.trim()}` : ""}`;
