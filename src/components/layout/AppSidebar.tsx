@@ -25,7 +25,7 @@ const navConfig = {
     {
       label: "Workflow",
       items: [
-        { href: "/pipeline", label: "Pipeline", icon: "icon-[solar--calendar-mark-linear]" },
+        { href: "/pipeline", label: "Deal Board", icon: "icon-[solar--calendar-mark-linear]" },
         { href: "/tasks", label: "Tasks", icon: "icon-[solar--list-bold-duotone]" },
         { href: "/test-drives", label: "Test Drives", icon: "icon-[solar--route-bold-duotone]" },
         { href: "/automation", label: "Automation", icon: "icon-[solar--history-line-duotone]" },
@@ -51,7 +51,7 @@ const navConfig = {
     {
       label: "Overview",
       items: [
-        { href: "/leads", label: "Leads Intake", icon: "icon-[solar--users-group-two-rounded-linear]" },
+        { href: "/leads", label: "Leads", icon: "icon-[solar--users-group-two-rounded-linear]" },
       ]
     },
     {
@@ -63,7 +63,7 @@ const navConfig = {
     {
       label: "Workflow",
       items: [
-        { href: "/pipeline", label: "Pipeline Board", icon: "icon-[solar--calendar-mark-linear]" },
+        { href: "/pipeline", label: "Deal Board", icon: "icon-[solar--calendar-mark-linear]" },
         { href: "/tasks", label: "My Tasks", icon: "icon-[solar--list-bold-duotone]" },
         { href: "/test-drives", label: "Test Drives", icon: "icon-[solar--route-bold-duotone]" },
       ]
