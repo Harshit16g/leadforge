@@ -8,6 +8,7 @@ import { ConfirmProvider } from "@/contexts/ConfirmContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { getAvatarFallbackUrl } from "@/lib/utils/avatar";
 import { MessagingProvider } from "@/contexts/MessagingContext";
+import { LeadsProvider } from "@/contexts/LeadsContext";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { role, user: authUser } = useAuth();
@@ -21,6 +22,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
     <MessagingProvider>
     <ConfirmProvider>
+    <LeadsProvider>
 
       <DashboardFiltersProvider>
         <div className="h-screen max-h-screen overflow-hidden bg-background text-foreground transition-colors duration-200 flex">
@@ -39,6 +41,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
         </div>
       </DashboardFiltersProvider>
+
+    </LeadsProvider>
     </ConfirmProvider>
     </MessagingProvider>
   );

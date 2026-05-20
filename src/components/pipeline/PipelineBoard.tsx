@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLeads } from "@/contexts/LeadsContext";
 import { DragDropContext, Droppable, Draggable, DropResult } from "@hello-pangea/dnd";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -23,7 +24,12 @@ const COLUMNS = [
 
 export function PipelineBoard({ initialLeads }: { initialLeads: any[] }) {
   const router = useRouter();
-  const [leads, setLeads] = useState(initialLeads);
+  const { leads, hydrateLeads, updateLeadInCache } = useLeads();
+
+  // Hydrate on mount
+  useEffect(() => {
+    hydrateLeads(initialLeads);
+  }, [initialLeads, hydrateLeads]);
 
   const groupedLeads = COLUMNS.reduce((acc, col) => {
     acc[col.id] = leads.filter(l => l.status === col.id);
@@ -38,10 +44,8 @@ export function PipelineBoard({ initialLeads }: { initialLeads: any[] }) {
 
     const newStatus = destination.droppableId;
     
-    // Optimistic UI Update
-    setLeads(prev => prev.map(l => 
-      l.id === draggableId ? { ...l, status: newStatus } : l
-    ));
+    // Optimistic UI Update in global cache immediately
+    updateLeadInCache(draggableId, { status: newStatus });
 
     // Effects
     if (newStatus === 'completed') {

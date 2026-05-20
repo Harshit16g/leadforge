@@ -26,10 +26,11 @@ import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
 import { Archive } from "lucide-react";
 import { SlaTimer } from "@/components/leads/SlaTimer";
+import { useLeads } from "@/contexts/LeadsContext";
 
 export function LeadsTable({ initialLeads }: { initialLeads: any[] }) {
   const { user: currentUser } = useAuth();
-  const [leads, setLeads] = useState(initialLeads);
+  const { leads, hydrateLeads, removeLeadsFromCache, updateLeadInCache } = useLeads();
   const [searchQuery, setSearchQuery] = useState("");
   const [sourceFilter, setSourceFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("all");
@@ -49,10 +50,10 @@ export function LeadsTable({ initialLeads }: { initialLeads: any[] }) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  // Keep state perfectly synchronized with updated server props
+  // Hydrate memory cache with server leads on first mount
   useEffect(() => {
-    setLeads(initialLeads);
-  }, [initialLeads]);
+    hydrateLeads(initialLeads);
+  }, [initialLeads, hydrateLeads]);
 
   // Handle dynamic real-time filtering and sorting
   const filteredLeads = useMemo(() => {
@@ -145,8 +146,8 @@ export function LeadsTable({ initialLeads }: { initialLeads: any[] }) {
         ? `Archived ${result.archived} lead(s). ${result.skipped} skipped (not converted/lost).`
         : `${result.archived} lead(s) moved to Ledger successfully.`;
       toast.success(msg);
-      // Remove archived leads from local state immediately
-      setLeads(prev => prev.filter(l => !selectedLeadIds.includes(l.id)));
+      // Remove archived leads from global state cache immediately
+      removeLeadsFromCache(selectedLeadIds);
       setSelectedLeadIds([]);
     } catch (err: any) {
       toast.error(err.message || 'Failed to archive leads');
@@ -161,6 +162,10 @@ export function LeadsTable({ initialLeads }: { initialLeads: any[] }) {
     setBulkLoading(true);
     try {
       await bulkUpdateLeads(selectedLeadIds, chosenRepId);
+      // Optimistically update assignments in global cache immediately
+      selectedLeadIds.forEach(id => {
+        updateLeadInCache(id, { assigned_to: chosenRepId });
+      });
       toast.success(`Successfully reassigned ${selectedLeadIds.length} leads!`);
       setSelectedLeadIds([]);
     } catch (err: any) {
