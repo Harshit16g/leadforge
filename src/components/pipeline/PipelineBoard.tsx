@@ -147,10 +147,36 @@ export function PipelineBoard({ initialLeads }: { initialLeads: any[] }) {
                                 </div>
                               </div>
 
-                              <div className="space-y-1 mb-4">
-                                <p className="text-xs font-medium text-muted-foreground truncate">{lead.notes || 'Interested in SUV'}</p>
-                                <p className="text-[11px] font-semibold text-muted-foreground/70 uppercase tracking-wider">{lead.source}</p>
-                              </div>
+                              {(() => {
+                                let vehicleModel = '';
+                                let displayNotes = '';
+                                try {
+                                  if (lead.notes && lead.notes.startsWith('{')) {
+                                    const parsed = JSON.parse(lead.notes);
+                                    vehicleModel = parsed.vehicle || '';
+                                    displayNotes = parsed.notes || '';
+                                  } else {
+                                    displayNotes = lead.notes;
+                                  }
+                                } catch (e) {
+                                  displayNotes = lead.notes;
+                                }
+
+                                return (
+                                  <div className="space-y-2 mb-4">
+                                    {vehicleModel && (
+                                      <div className="text-[11px] font-bold text-blue-500 bg-blue-500/10 border border-blue-500/15 rounded px-2 py-0.5 inline-flex items-center gap-1 max-w-full">
+                                        <span className="shrink-0">🚘</span>
+                                        <span className="truncate">{vehicleModel}</span>
+                                      </div>
+                                    )}
+                                    <p className="text-xs font-medium text-muted-foreground truncate">
+                                      {displayNotes || (vehicleModel ? 'Vehicle preferences captured' : 'Interested in SUV')}
+                                    </p>
+                                    <p className="text-[11px] font-semibold text-muted-foreground/70 uppercase tracking-wider">{lead.source}</p>
+                                  </div>
+                                );
+                              })()}
 
                               <div className="flex items-center justify-between mt-4 pt-3 border-t border-border/60">
                                 <div className="flex items-center gap-1.5">
