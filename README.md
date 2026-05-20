@@ -1,6 +1,8 @@
 # LeadForge CRM — Assignment Documentation
 
-LeadForge is a Next.js-based CRM prototype for automotive sales teams to capture leads, manage pipeline stages, assign sales reps, track activities, and monitor performance.
+This repository currently implements a **LeadForge-style CRM prototype** (dealer lead operations UI + APIs) and also contains some legacy/migration artifacts from a broader Leaex codebase.
+
+For assignment evaluation, this README documents the **implemented LeadForge workflows visible in routes/components/APIs**.
 
 > This README replaces the previously mistaken README and is structured for **quick evaluator understanding**.
 
@@ -258,5 +260,6 @@ SUPABASE_SERVICE_ROLE_KEY=...
 ## 12) Known Notes
 
 - Some advanced modules may rely on seeded Supabase data.
+- The repo includes mixed historical artifacts (LeadForge UI modules + legacy Leaex references in some docs/config files).
 - Lint/build outcomes can depend on local environment/network (e.g., font fetching during build).
 
