@@ -41,18 +41,19 @@ This README is structured for evaluator-friendly understanding of the project ar
 
 ```mermaid
 flowchart LR
-    U[End Users\nManager / Sales / Public Lead] --> N[Next.js App Router]
-    N --> P[Pages & Components]
-    N --> A[Server Actions]
-    N --> R[API Route Handlers]
+    U["End Users<br/>Manager / Sales / Public Lead"] --> N["Next.js App Router"]
 
-    A --> S[(Supabase)]
+    N --> P["Pages & Components"]
+    N --> A["Server Actions"]
+    N --> R["API Route Handlers"]
+
+    A --> S[("Supabase")]
     R --> S
 
-    W[External Sources\n(Ads / Forms / Partners)] --> H[/api/webhooks/leads]
+    W["External Sources<br/>(Ads / Forms / Partners)"] --> H["/api/webhooks/leads"]
     H --> S
 
-    S --> V[CRM Views\nDashboard, Leads, Pipeline, Tasks]
+    S --> V["CRM Views<br/>Dashboard, Leads, Pipeline, Tasks"]
 ```
 
 ---
@@ -61,27 +62,28 @@ flowchart LR
 
 ```mermaid
 graph TD
-    Root[/] --> Dash[/dashboard]
-    Root --> Leads[/leads]
-    Root --> Capture[/capture]
+    Root["/"] --> Dash["/dashboard"]
+    Root --> Leads["/leads"]
+    Root --> Capture["/capture"]
 
-    Dash --> Analytics[/analytics]
-    Dash --> Team[/team]
-    Dash --> Settings[/settings]
-    Dash --> Pipeline[/pipeline]
-    Dash --> Tasks[/tasks]
-    Dash --> Messages[/messages]
-    Dash --> Campaigns[/campaigns]
-    Dash --> TestDrives[/test-drives]
-    Dash --> QR[/qr]
+    Dash --> Analytics["/analytics"]
+    Dash --> Team["/team"]
+    Dash --> Settings["/settings"]
+    Dash --> Pipeline["/pipeline"]
+    Dash --> Tasks["/tasks"]
+    Dash --> Messages["/messages"]
+    Dash --> Campaigns["/campaigns"]
+    Dash --> TestDrives["/test-drives"]
+    Dash --> QR["/qr"]
 
-    Leads --> LeadDetail[/leads/[id]]
+    Leads --> LeadDetail["/leads/[id]"]
 
-    API[/api/partner/*] --> Emp[/employees]
-    API --> Msg[/messages]
-    API --> Restore[/ledger/[id]/restore]
+    API["/api/partner/*"] --> Emp["/employees"]
+    API --> Msg["/messages"]
+    API --> Restore["/ledger/[id]/restore"]
 
-    Webhook[/api/webhooks/leads] --> Leads
+    Webhook["/api/webhooks/leads"] --> Leads
+
 ```
 
 ---
