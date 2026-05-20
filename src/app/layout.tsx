@@ -4,6 +4,7 @@ import './globals.css'
 import { Toaster } from 'sonner'
 import { AuthProvider } from '@/contexts/AuthContext'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
+import { Analytics } from '@vercel/analytics/next'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,6 +27,7 @@ export default function RootLayout({
             <Toaster position="top-right" richColors />
           </ThemeProvider>
         </AuthProvider>
+        <Analytics />
       </body>
     </html>
   )
