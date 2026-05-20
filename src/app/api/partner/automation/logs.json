@@ -1,0 +1,46 @@
+[
+  {
+    "id": "slwn8k",
+    "rule_name": "Flow Auto: lead.created",
+    "trigger_event": "lead.created",
+    "channel": "SMS",
+    "trigger_offset_minutes": 0,
+    "recipient": "Aditya Birla 755",
+    "body": "Welcome to HSR Motors, Aditya Birla 755! We have received your inquiry. One of our sales advisors will connect with you shortly regarding vehicle options.",
+    "status": "delivered",
+    "created_at": "2026-05-20T03:20:53.107Z"
+  },
+  {
+    "id": "qvn2nq",
+    "rule_name": "Flow Auto: lead.created",
+    "trigger_event": "lead.created",
+    "channel": "SMS",
+    "trigger_offset_minutes": 0,
+    "recipient": "Aditya Birla 227",
+    "body": "Welcome to HSR Motors, Aditya Birla 227! We have received your inquiry. One of our sales advisors will connect with you shortly regarding vehicle options.",
+    "status": "delivered",
+    "created_at": "2026-05-20T03:20:30.529Z"
+  },
+  {
+    "id": "013fux",
+    "rule_name": "Flow Auto: lead.created",
+    "trigger_event": "lead.created",
+    "channel": "SMS",
+    "trigger_offset_minutes": 0,
+    "recipient": "Aditya Birla",
+    "body": "Welcome to HSR Motors, Aditya Birla! We have received your inquiry. One of our sales advisors will connect with you shortly regarding vehicle options.",
+    "status": "delivered",
+    "created_at": "2026-05-20T03:20:05.776Z"
+  },
+  {
+    "id": "1k9mnq",
+    "rule_name": "Flow Auto: lead.created",
+    "trigger_event": "lead.created",
+    "channel": "SMS",
+    "trigger_offset_minutes": 0,
+    "recipient": "Aditya Birla Duplicate",
+    "body": "Welcome to HSR Motors, Aditya Birla Duplicate! We have received your inquiry. One of our sales advisors will connect with you shortly regarding vehicle options.",
+    "status": "delivered",
+    "created_at": "2026-05-20T03:18:32.595Z"
+  }
+]

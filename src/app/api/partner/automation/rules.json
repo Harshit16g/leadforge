@@ -1,0 +1,24 @@
+[
+  {
+    "id": "rule-booking-confirm",
+    "rule_name": "Showroom Booking Confirmation Loop",
+    "trigger_event": "booking.completed",
+    "channel": "sms",
+    "template_id": "temp-booking-welcome",
+    "trigger_offset_minutes": 0,
+    "is_active": true,
+    "total_fired": 12,
+    "created_at": "2026-05-15T03:18:32.782Z"
+  },
+  {
+    "id": "rule-sla-warn",
+    "rule_name": "Hot Lead SLA Overdue Escalator",
+    "trigger_event": "booking.reminder",
+    "channel": "sms",
+    "template_id": "temp-hot-sla-warn",
+    "trigger_offset_minutes": 15,
+    "is_active": true,
+    "total_fired": 4,
+    "created_at": "2026-05-17T03:18:32.782Z"
+  }
+]

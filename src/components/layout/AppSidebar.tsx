@@ -19,7 +19,6 @@ const navConfig = {
       label: "Messaging",
       items: [
         { href: "/messages", label: "Inbox", icon: "icon-[solar--chat-round-dots-linear]" },
-        { href: "/contact-requests", label: "Inquiries", icon: "icon-[solar--phone-linear]" },
       ]
     },
     {
