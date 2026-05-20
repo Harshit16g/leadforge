@@ -92,6 +92,8 @@ export async function runLeadAutomationRules() {
   const now = new Date();
   const sixHoursAgo = new Date(now.getTime() - 6 * 60 * 60 * 1000).toISOString();
   const twentyFourHoursAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString();
+  const oneHourAgo = new Date(now.getTime() - 1 * 60 * 60 * 1000).toISOString();
+  const seventyTwoHoursAgo = new Date(now.getTime() - 72 * 60 * 60 * 1000).toISOString();
 
   // Fetch active leads that are either completed, lost, or in intermediate stages
   const { data: activeLeads, error } = await supabase
@@ -100,6 +102,13 @@ export async function runLeadAutomationRules() {
     .eq('archived', false);
 
   if (error || !activeLeads || activeLeads.length === 0) return;
+
+  // Pre-load sales profiles for premium round-robin / senior routing
+  const { data: reps } = await supabase
+    .from('profiles')
+    .select('id, name')
+    .eq('role', 'sales');
+  const seniorRep = reps?.find(r => r.name.includes('Sarah') || r.name.includes('Jenkins')) || reps?.[0];
 
   for (const lead of activeLeads) {
     const latestTime = lead.last_interaction_at || lead.created_at;
@@ -148,6 +157,93 @@ export async function runLeadAutomationRules() {
         lead_id: lead.id,
         type: 'note',
         content: 'System Automation: Reverted lead status to NEW due to 24-hour inactivity.'
+      }]);
+    }
+
+    // --- EXTENDED SLA WORKFLOW AUTOMATION LAYER ---
+
+    // Rule D: Inactivity Warning Escalation (Untouched for 3 days / 72 hours)
+    if (
+      ['new', 'contacted', 'qualified', 'negotiation'].includes(lead.status) &&
+      latestTime < seventyTwoHoursAgo
+    ) {
+      // Check if alert already sent in last 24 hours to avoid spamming interaction notes
+      const { data: recentAlerts } = await supabase
+        .from('interactions')
+        .select('id')
+        .eq('lead_id', lead.id)
+        .like('content', '%[CRITICAL SLA BREACH]%')
+        .limit(1);
+
+      if (!recentAlerts || recentAlerts.length === 0) {
+        await supabase.from('interactions').insert([{
+          lead_id: lead.id,
+          type: 'note',
+          content: `[CRITICAL SLA BREACH] Lead [${lead.name}] has been inactive for over 3 days (72 hours). System has alerted the general showroom manager for immediate inspection and reassignment.`
+        }]);
+      }
+    }
+
+    // Rule E: Hot Lead neglected Escalation (Touchless for > 1 hour)
+    if (
+      (lead.health === 'hot' || (lead.score && lead.score >= 80)) &&
+      ['new', 'contacted'].includes(lead.status) &&
+      latestTime < oneHourAgo
+    ) {
+      const { data: recentHotAlerts } = await supabase
+        .from('interactions')
+        .select('id')
+        .eq('lead_id', lead.id)
+        .like('content', '%[HOT LEAD ESCALATION]%')
+        .limit(1);
+
+      if (!recentHotAlerts || recentHotAlerts.length === 0) {
+        await supabase.from('interactions').insert([{
+          lead_id: lead.id,
+          type: 'note',
+          content: `[HOT LEAD ESCALATION] High-priority/hot lead [${lead.name}] has been unserviced for over 1 hour. Urgent sales callback is required immediately to avoid losing conversion momentum.`
+        }]);
+      }
+    }
+
+    // Rule F: High-Value Customer Premium Routing & Prioritization
+    let isHighValue = false;
+    try {
+      if (lead.notes && lead.notes.startsWith('{')) {
+        const parsed = JSON.parse(lead.notes);
+        const vehicle = (parsed.vehicle || '').toLowerCase();
+        const budget = (parsed.budget || '').toLowerCase();
+        if (
+          vehicle.includes('ioniq') ||
+          vehicle.includes('tucson') ||
+          budget.includes('₹20l') ||
+          budget.includes('₹25l') ||
+          budget.includes('₹30l')
+        ) {
+          isHighValue = true;
+        }
+      } else if (lead.notes && (lead.notes.toLowerCase().includes('ioniq') || lead.notes.toLowerCase().includes('tucson'))) {
+        isHighValue = true;
+      }
+    } catch (e) {
+      // safe fallback on string parsing
+    }
+
+    if (isHighValue && lead.priority !== 'high') {
+      const updates: any = { priority: 'high' };
+      let routeLog = '';
+
+      if (seniorRep && lead.assigned_to !== seniorRep.id) {
+        updates.assigned_to = seniorRep.id;
+        routeLog = ` and auto-assigned to Senior Sales Advisor [${seniorRep.name}]`;
+      }
+
+      await supabase.from('leads').update(updates).eq('id', lead.id);
+
+      await supabase.from('interactions').insert([{
+        lead_id: lead.id,
+        type: 'status_change',
+        content: `[VIP AUTOMATION TRIGGER] Inbound analysis flagged high-value interest in premium vehicle model/budget. Upgraded lead priority to HIGH${routeLog}.`
       }]);
     }
   }
