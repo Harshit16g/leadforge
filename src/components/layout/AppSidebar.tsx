@@ -93,7 +93,7 @@ export function SidebarContent({ role, onItemClick }: SidebarContentProps) {
   return (
     <div className="flex flex-col h-full bg-sidebar text-sidebar-foreground">
       {/* Brand Header */}
-      <div className="flex h-16 items-center gap-3 border-b border-sidebar-border/80 px-5 shrink-0">
+      <div className="flex h-16 items-center gap-3 px-5 shrink-0">
         <div className="grid place-items-center h-9 w-9 rounded-xl bg-primary text-primary-foreground font-black shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_4px_12px_rgba(37,99,235,0.3)] text-base">
           L
         </div>
