@@ -343,7 +343,7 @@ export function LeadsTable({ initialLeads }: { initialLeads: any[] }) {
                 <th className="px-5 py-3 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Source</th>
                 <th className="px-5 py-3 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Assigned</th>
                 <th className="px-5 py-3 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Status</th>
-                <th className="px-5 py-3 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">SLA Response</th>
+                <th className="px-5 py-3 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Response Status</th>
                 <th className="px-5 py-3 text-[11px] font-bold uppercase tracking-wider text-muted-foreground text-right">Actions</th>
               </tr>
             </thead>

@@ -188,11 +188,11 @@ export default function SettingsPage() {
               <div className="space-y-6 animate-in fade-in duration-200">
                 <div>
                   <h2 className="text-lg font-bold text-foreground">
-                    {isManager ? "Dealership Alerts & SLAs" : "Notification Preferences"}
+                    {isManager ? "Dealership Alerts & Targets" : "Notification Preferences"}
                   </h2>
                   <p className="text-xs text-muted-foreground mt-0.5">
                     {isManager 
-                      ? "Configure lead SLA timers, breach thresholds, and dealership escalation alarms."
+                      ? "Configure lead follow-up timers, response targets, and dealership escalation alarms."
                       : "Control how and when you receive system alerts for incoming customer inquiries."
                     }
                   </p>
@@ -202,7 +202,7 @@ export default function SettingsPage() {
                   {isManager ? (
                     <>
                       <div className="space-y-1.5">
-                        <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Lead SLA Response Breaching Target</label>
+                        <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Lead Response Goal Target</label>
                         <select 
                           value={slaTime}
                           onChange={(e) => setSlaTime(e.target.value)}

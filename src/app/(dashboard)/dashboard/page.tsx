@@ -748,14 +748,14 @@ export default function DashboardPage() {
             </ChartCard>
 
             {/* Today's Operational Snapshot */}
-            <ChartCard title="Today's Operational Snapshot" subtitle="Dealership real-time SLAs">
+            <ChartCard title="Today's Operational Snapshot" subtitle="Dealership response tracking">
               <div className="grid grid-cols-3 gap-2 text-center mt-2">
                 <div className="bg-muted/40 p-3 rounded-2xl border border-border/50">
                   <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Reps On Duty</p>
                   <p className="text-xl font-bold mt-1 text-foreground">{reps.length > 0 ? `${reps.length} Reps` : "3 Reps"}</p>
                 </div>
                 <div className="bg-rose-500/5 p-3 rounded-2xl border border-rose-500/10">
-                  <p className="text-[10px] font-bold text-rose-500 uppercase tracking-wider">SLA Breaches</p>
+                  <p className="text-[10px] font-bold text-rose-500 uppercase tracking-wider">Overdue Leads</p>
                   <p className="text-xl font-bold mt-1 text-rose-600">{slaBreaches} {slaBreaches === 1 ? 'Lead' : 'Leads'}</p>
                 </div>
                 <div className="bg-emerald-500/5 p-3 rounded-2xl border border-emerald-500/10">

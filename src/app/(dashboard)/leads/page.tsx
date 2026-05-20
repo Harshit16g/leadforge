@@ -65,13 +65,13 @@ export default async function LeadsPage() {
           <div className="bg-card rounded-xl border border-border shadow-sm overflow-hidden">
             <div className="px-4 py-3 bg-muted/40 border-b border-border/80 flex items-center gap-2">
               <AlertTriangle className="size-4 text-orange-500" />
-              <h3 className="font-semibold text-sm text-foreground">SLA Alerts</h3>
+              <h3 className="font-semibold text-sm text-foreground">Follow-up Alerts</h3>
             </div>
             <div className="p-4 space-y-3">
               {breachedHotLeadsCount > 0 ? (
                 <div className="p-3 bg-rose-500/10 border border-rose-500/20 rounded-lg animate-pulse">
                   <p className="text-xs font-bold text-rose-600 dark:text-rose-400 flex items-center gap-1.5">
-                    <AlertCircle className="size-4 text-rose-500" /> Critical Breach Alert
+                    <AlertCircle className="size-4 text-rose-500" /> Response Overdue Alert
                   </p>
                   <p className="text-[11px] text-rose-600 dark:text-rose-400 mt-1 font-semibold">
                     {breachedHotLeadsCount} hot lead{breachedHotLeadsCount > 1 ? 's' : ''} untouched &gt; 30 mins!
@@ -82,9 +82,9 @@ export default async function LeadsPage() {
                 <div className="p-3 bg-emerald-500/5 border border-emerald-500/10 rounded-lg flex items-start gap-2.5">
                   <CheckCircle2 className="size-4 text-emerald-500 shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-xs font-bold text-emerald-600">SLA Healthy</p>
+                    <p className="text-xs font-bold text-emerald-600">Follow-up Healthy</p>
                     <p className="text-[10px] text-emerald-600/80 mt-0.5">
-                      All high-priority hot leads are being serviced inside safe SLA windows.
+                      All high-priority hot leads are being serviced inside safe response goals.
                     </p>
                   </div>
                 </div>

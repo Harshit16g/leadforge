@@ -67,7 +67,7 @@ export function LeadActionPanel({ leadId, leadName, leadCreatedAt, interactions 
     slaPill = (
       <div className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 rounded-xl text-xs font-bold shadow-sm">
         <CheckCircle2 className="size-3.5 shrink-0" />
-        <span>SLA Achieved: {responseTime}m</span>
+        <span>Response Goal Met: {responseTime}m</span>
       </div>
     );
   } else {
@@ -80,7 +80,7 @@ export function LeadActionPanel({ leadId, leadName, leadCreatedAt, interactions 
         isBreached ? "bg-rose-500/10 text-rose-500 border-rose-500/20" : "bg-orange-500/10 text-orange-500 border-orange-500/20"
       )}>
         {isBreached ? <AlertCircle className="size-3.5 shrink-0" /> : <Activity className="size-3.5 shrink-0 animate-pulse" />}
-        <span>{isBreached ? `SLA Overdue: ${elapsed - 15}m` : `SLA: ${remaining}m left`}</span>
+        <span>{isBreached ? `Overdue: ${elapsed - 15}m` : `Goal: ${remaining}m left`}</span>
       </div>
     );
   }
@@ -273,9 +273,9 @@ export function LeadActionPanel({ leadId, leadName, leadCreatedAt, interactions 
 
       <div className="h-px bg-border/60" />
 
-      {/* SLA Badge in operations panel */}
+      {/* Response Goal Badge in operations panel */}
       <div className="flex items-center justify-between">
-        <span className="text-xs font-semibold text-muted-foreground">SLA Status</span>
+        <span className="text-xs font-semibold text-muted-foreground">Response Goal</span>
         {slaPill}
       </div>
 

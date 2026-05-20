@@ -61,7 +61,7 @@ export function SlaTimer({ createdAt, status }: SlaTimerProps) {
     return (
       <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase text-rose-600 dark:text-rose-400 bg-rose-500/10 px-2.5 py-0.5 rounded-xl border border-rose-500/20 animate-pulse">
         <AlertCircle className="size-3 shrink-0" />
-        <span>Breach: +{formattedTime}</span>
+        <span>Overdue: +{formattedTime}</span>
       </span>
     );
   }

@@ -110,7 +110,7 @@ export default async function LeadDetailsPage({ params }: { params: { id: string
     slaPill = (
       <div className="flex items-center gap-1.5 px-3 py-1 bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 rounded-full text-xs font-bold shadow-sm flex-shrink-0">
         <CheckCircle2 className="size-3.5" />
-        <span>SLA Achieved: {responseTime}m</span>
+        <span>Goal Achieved: {responseTime}m</span>
       </div>
     );
   } else {
@@ -123,7 +123,7 @@ export default async function LeadDetailsPage({ params }: { params: { id: string
         isBreached ? "bg-rose-500/10 text-rose-500 border-rose-500/20" : "bg-orange-500/10 text-orange-500 border-orange-500/20"
       )}>
         {isBreached ? <AlertCircle className="size-3.5" /> : <Activity className="size-3.5 animate-pulse" />}
-        <span>{isBreached ? `SLA Overdue: ${elapsed - 15}m` : `SLA: ${remaining}m left`}</span>
+        <span>{isBreached ? `Overdue: ${elapsed - 15}m` : `Goal: ${remaining}m left`}</span>
       </div>
     );
   }

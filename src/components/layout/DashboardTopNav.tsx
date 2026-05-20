@@ -157,7 +157,7 @@ export function DashboardTopNav({ user, businessName }: DashboardTopNavProps) {
                 <DropdownMenuItem className="flex flex-col items-start gap-1 p-3 rounded-xl hover:bg-muted cursor-pointer focus:bg-muted">
                   <div className="flex items-center gap-2">
                     <span className="h-2 w-2 rounded-full bg-destructive" />
-                    <span className="text-xs font-bold text-foreground">SLA Breach Warning</span>
+                    <span className="text-xs font-bold text-foreground">Response Overdue Warning</span>
                   </div>
                   <span className="text-[10px] text-muted-foreground">Rohit Khanna untouched for 2hrs</span>
                 </DropdownMenuItem>
