@@ -150,19 +150,6 @@ export function SidebarContent({ role, onItemClick }: SidebarContentProps) {
         ))}
       </nav>
 
-      {/* AI Assistant Quick Actions */}
-      <div className="p-4 border-t border-sidebar-border bg-sidebar/50">
-        <div className="p-3 bg-white/5 border border-white/10 rounded-2xl flex flex-col gap-2 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-12 h-12 bg-blue-500/10 rounded-full blur-md" />
-          <div className="flex items-center gap-2 text-white font-bold text-xs">
-            <Sparkles className="size-3.5 text-blue-400" />
-            <span>AI Copilot Active</span>
-          </div>
-          <p className="text-[10px] text-sidebar-foreground/50 leading-relaxed">
-            Ready to classify incoming leads and optimize follow-up SLAs automatically.
-          </p>
-        </div>
-      </div>
     </div>
   )
 }
