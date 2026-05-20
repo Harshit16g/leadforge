@@ -1,0 +1,271 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@plugin "@iconify/tailwind4";
+@source "../node_modules/streamdown/dist/*.js";
+
+/* ============================================================
+   LEAEX V2 — Design System (Combined with LeadForge Styles)
+   Updated to match client light dashboard (blue/teal)
+   ============================================================ */
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+      1. LIGHT MODE (Client Approved)
+   ============================================================ */
+
+:root {
+  --background: 0 0% 98%;
+  --foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  --primary: 221 83% 53%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 160 84% 39%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 210 20% 96%;
+  --muted-foreground: 215 16% 47%;
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 221 83% 53%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --success: 142 71% 45%;
+  --success-foreground: 0 0% 100%;
+
+  /* Sidebar - ALWAYS DARK */
+  --sidebar: 222 47% 11%;
+  --sidebar-foreground: 210 20% 92%;
+  --sidebar-accent: 217 33% 17%;
+  --sidebar-border: 217 33% 17%;
+
+  /* Charts */
+  --chart-1: 221 83% 53%;
+  --chart-2: 160 84% 39%;
+  --chart-3: 262 83% 58%;
+  --chart-4: 38 92% 50%;
+  --chart-5: 0 84% 60%;
+  --chart-grid: 214 32% 91%;
+  --chart-text: 215 16% 47%;
+
+  --radius: 1rem;
+  --shadow-atmospheric: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --hero-gradient: linear-gradient(105deg, hsl(221 83% 53%) 0%, hsl(160 84% 39%) 100%);
+  --font-brand: 'Inter', system-ui, sans-serif;
+}
+
+.dark {
+  --background: 222 47% 4%;
+  --foreground: 210 20% 92%;
+  --card: 222 47% 8%;
+  --card-foreground: 210 20% 92%;
+  --popover: 222 47% 8%;
+  --popover-foreground: 210 20% 92%;
+  --primary: 217 91% 60%;
+  --primary-foreground: 222 47% 11%;
+  --secondary: 160 84% 45%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 217 33% 14%;
+  --muted-foreground: 215 20% 65%;
+  --border: 217 33% 17%;
+  --input: 217 33% 17%;
+  --ring: 217 91% 60%;
+  --destructive: 0 84% 70%;
+  --destructive-foreground: 0 0% 100%;
+  --success: 142 71% 55%;
+  --success-foreground: 0 0% 100%;
+
+  /* Sidebar - SAME as light */
+  --sidebar: 222 47% 11%;
+  --sidebar-foreground: 210 20% 92%;
+  --sidebar-accent: 217 33% 17%;
+  --sidebar-border: 217 33% 17%;
+
+  --chart-1: 217 91% 65%;
+  --chart-2: 160 84% 45%;
+  --chart-3: 262 83% 68%;
+  --chart-4: 38 92% 60%;
+  --chart-5: 0 84% 70%;
+  --chart-grid: 217 33% 17%;
+  --chart-text: 215 20% 65%;
+}
+
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-success: hsl(var(--success));
+  --color-success-foreground: hsl(var(--success-foreground));
+
+  --color-sidebar: hsl(var(--sidebar));
+  --color-sidebar-foreground: hsl(var(--sidebar-foreground));
+  --color-sidebar-accent: hsl(var(--sidebar-accent));
+  --color-sidebar-border: hsl(var(--sidebar-border));
+
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+  --color-chart-grid: hsl(var(--chart-grid));
+  --color-chart-text: hsl(var(--chart-text));
+
+  --radius: var(--radius);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-brand: var(--font-brand);
+}
+
+/* ============================================================
+   BASE STYLES & LAYERS
+   ============================================================ */
+
+html {
+  height: 100%;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+
+/* Utility classes to enforce the soft UI style */
+.leadforge-card {
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.01);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.leadforge-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+/* Custom styles from globals.leaex.css */
+@layer utilities {
+  .animate-spotlight {
+    animation: spotlight 2s ease 0.75s forwards;
+  }
+
+  .animate-scroll {
+    animation: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-thin {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .animate-aurora {
+    animation: aurora 60s linear infinite;
+  }
+
+  .wordmark {
+    font-family: var(--font-brand);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    font-weight: 900;
+  }
+
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  .dark .glass-panel {
+    background: rgba(11, 17, 32, 0.8);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: var(--shadow-atmospheric);
+  }
+
+  .chart-grid {
+    stroke: hsl(var(--chart-grid));
+  }
+
+  .chart-text {
+    fill: hsl(var(--chart-text));
+  }
+
+  .hero-gradient {
+    background: var(--hero-gradient);
+  }
+}
+
+* {
+  border-color: hsl(var(--border));
+  outline-color: hsl(var(--ring) / 0.5);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+}

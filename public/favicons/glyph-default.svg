@@ -1,0 +1,17 @@
+<svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Stable Structural X -->
+  <g stroke="#8BA7B3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.8" vector-effect="non-scaling-stroke">
+    <path d="M6 6 L12 12" />
+    <path d="M26 26 L20 20" />
+    <path d="M26 6 L20 12" />
+    <path d="M6 26 L12 20" />
+  </g>
+
+  <!-- Cyan Operational Core (Stable Intelligence) -->
+  <g stroke="#CBEEF3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" opacity="1" vector-effect="non-scaling-stroke">
+    <path d="M12 12 L13 13" />
+    <path d="M20 20 L19 19" />
+    <path d="M20 12 L19 13" />
+    <path d="M12 20 L13 19" />
+  </g>
+</svg>

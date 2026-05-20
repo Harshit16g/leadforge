@@ -1,0 +1,25 @@
+<svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dormant Structural X -->
+  <g stroke="#8BA7B3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.4" vector-effect="non-scaling-stroke">
+    <path d="M6 6 L12 12" />
+    <path d="M26 26 L20 20" />
+    <path d="M26 6 L20 12" />
+    <path d="M6 26 L12 20" />
+  </g>
+
+  <!-- Inner Fracture Contrast -->
+  <g stroke="#8BA7B3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.8" vector-effect="non-scaling-stroke">
+    <path d="M12 12 L13 13" />
+    <path d="M20 20 L19 19" />
+    <path d="M20 12 L19 13" />
+    <path d="M12 20 L13 19" />
+  </g>
+
+  <!-- Optional Steel Edge Pressure -->
+  <g stroke="#8BA7B3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" opacity="0.2" vector-effect="non-scaling-stroke">
+    <path d="M4 4 L5 5" />
+    <path d="M28 28 L27 27" />
+    <path d="M28 4 L27 5" />
+    <path d="M4 28 L5 27" />
+  </g>
+</svg>
