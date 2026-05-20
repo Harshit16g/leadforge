@@ -1,6 +1,0 @@
-export * from './staff-member.model'
-export * from './service-catalogue.model'
-export * from './expense.model'
-export * from './day-closing.model'
-export * from './attendance-log.model'
-export * from './payroll-record.model'

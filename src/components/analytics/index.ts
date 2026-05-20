@@ -1,7 +1,0 @@
-export { RadialChart } from './RadialChart'
-export { AnalyticsRadarChart as RadarChart } from './RadarChart'
-export { PieChartInteractive } from './PieChartInteractive'
-export { LineChartInteractive } from './LineChartInteractive'
-export { BarChartInteractive } from './BarChartInteractive'
-export { AreaChartInteractive } from './AreaChartInteractive'
-export { GradientAreaChart } from './GradientAreaChart'
