@@ -66,6 +66,15 @@ export default function RoleSelectionPage() {
           <p className="text-base text-slate-500 font-bold max-w-xl mx-auto uppercase tracking-wide">
             Select an organization profile below to instant-login with click-to-go credentials.
           </p>
+          <a
+            href="https://github.com/harshit16g/leadforge"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-2 text-xs font-extrabold uppercase tracking-widest text-slate-700 transition hover:border-slate-400 hover:bg-slate-50"
+          >
+            <ArrowRight className="size-4" />
+            See the GitHub repo
+          </a>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
