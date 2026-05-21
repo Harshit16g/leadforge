@@ -58,7 +58,7 @@ flowchart LR
 
 ---
 
-## 5) Route Map (Evaluator Quick View)
+## 5) Route Map (Quick View)
 
 ```mermaid
 graph TD
@@ -226,7 +226,7 @@ SUPABASE_SERVICE_ROLE_KEY=...
 
 ---
 
-## 10) Evaluation Guide (Fast Review Path)
+## 10)  Guide (Fast Review Path)
 
 1. Open `/` and verify role-based sandbox entry.
 2. Open `/capture` and submit a sample lead.
